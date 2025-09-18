@@ -41,12 +41,15 @@ namespace sessia3.Pages
                     {
                         case 1:
                             MessageBox.Show("Здравствуйте, Администратор " + userObj.name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            NavigationService.Navigate(new DataOutput());
                             break;
                         case 2:
                             MessageBox.Show("Здравствуйте, Ученик " + userObj.name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            NavigationService.Navigate(new DataOutput());
                             break;
                         case 3:
                             MessageBox.Show("Здравствуйте, Менеджер " + userObj.name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            NavigationService.Navigate(new DataOutput());
                             break;
                         default:
                             MessageBox.Show("Данные не обнаружены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -58,6 +61,11 @@ namespace sessia3.Pages
             {
                 MessageBox.Show("Ошибка " + ex.Message.ToString() + "Критическая ошибка приложения!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void ButtonVhodGost_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DataOutput());
         }
     }
 }
