@@ -45,6 +45,9 @@ namespace sessia3.Pages
                         case 2:
                             MessageBox.Show("Здравствуйте, Ученик " + userObj.name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
+                        case 3:
+                            MessageBox.Show("Здравствуйте, Менеджер " + userObj.name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
                         default:
                             MessageBox.Show("Данные не обнаружены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
                             break;
