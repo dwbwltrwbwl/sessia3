@@ -27,8 +27,20 @@ namespace sessia3.Pages
             InitializeComponent();
             allProducts = AppConnect.model01.products.ToList();
             listProducts.ItemsSource = allProducts;
-        }
 
+            LoadProductTypes();
+        }
+        private void LoadProductTypes()
+        {
+            var productTypes = AppConnect.model01.prod_types.Select(
+                pt => pt.prod_type).Distinct().OrderBy(type => type).ToList();
+            ComboFilter.Items.Clear();
+            ComboFilter.Items.Add(new ComboBoxItem { Content = "Все типы" });
+            foreach (var type in productTypes)
+            {
+                ComboFilter.Items.Add(new ComboBoxItem { Content = type });
+            }
+        }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (listProducts.SelectedItem == null)
@@ -65,6 +77,19 @@ namespace sessia3.Pages
             {
                 MessageBox.Show("Ошибка при удалении: " + ex.Message + "Подробности: " + ex.InnerException?.Message, "Ошибка базы данных", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ComboFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listProducts == null || allProducts == null)
+            {
+                return;
+            }
+            string selectedType = (ComboFilter.SelectedItem as ComboBoxItem)?.Content.ToString();
+            var filteredProduct = allProducts.Where(product =>
+            product != null && (selectedType == "Все типы" || (product.prod_types != null
+            && product.prod_types.prod_type == selectedType))).ToList();
+            listProducts.ItemsSource = filteredProduct;
         }
     }
 }
